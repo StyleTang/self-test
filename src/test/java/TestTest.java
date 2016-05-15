@@ -8,5 +8,6 @@ public class TestTest {
     @Test
     public void test(){
         System.out.println("test ssh key 2");
+        System.out.println("is this ok ?");
     }
 }
