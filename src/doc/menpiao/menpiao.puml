@@ -1,0 +1,7 @@
+@startuml
+orderPackage -> tickets: saveOrder
+orderPackage -> tickets: queryOrder
+orderPackage -> tickets: payOrder
+orderPackage -> tickets: queryOrder
+tickets-->orderPackage:notify tickets
+@enduml
