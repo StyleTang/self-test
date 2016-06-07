@@ -45,6 +45,6 @@ public class FileSystemClassLoader extends ClassLoader {
 
     private String classNameToPath(String className) {
         return rootDir + File.separatorChar
-                + className.replace('.', File.separatorChar) + ".class";
+                + className.replace('.', File.separatorChar) + ".clazz";
     }
 }
