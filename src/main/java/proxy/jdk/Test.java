@@ -1,7 +1,7 @@
 package proxy.jdk;
 
-import proxy.common.ISubject;
-import proxy.common.ISubjectImpl;
+import proxy.base.ISubject;
+import proxy.base.ISubjectImpl;
 
 import java.lang.reflect.Proxy;
 

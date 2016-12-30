@@ -1,3 +1,5 @@
 /.idea
 /self-test.iml
 # Created by .ignore support plugin (hsz.mobi)
+/src/doc/
+/target/

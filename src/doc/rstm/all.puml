@@ -1,0 +1,14 @@
+@startuml
+title 动态位长总体流程图
+(*)--> "适用ASBA的误判算法计算当前应该适用的位长len"
+--> "根据计算出的位长进行lookup,判断是否发生冲突"
+if 冲突? then
+--> [Yes] 产生冲突
+--> (*)
+
+else
+--> [No]没有产生冲突
+--> 适用当前的len和对应的hash进行insert
+-->(*)
+Endif
+@enduml

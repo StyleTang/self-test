@@ -1,4 +1,4 @@
-package proxy.common;
+package proxy.base;
 
 /**
  * Created by tangjie on 16/6/7.

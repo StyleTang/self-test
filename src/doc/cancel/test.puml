@@ -1,0 +1,32 @@
+@startuml
+actor user
+participant orderBooking
+user -> orderBooking : 进入填单页(查询订单信息)
+activate orderBooking
+orderBooking-> orderPackage:查询保险信息
+orderPackage ->openAPI:查询取消险(单独接口，或者不迁)
+user -> orderBooking:saveOrder(包含取消险)
+orderBooking -> orderBiz:generateMainOrderData
+orderBooking ->orderCore: order-core 成单
+orderBooking ->orderPackage :取消险成单
+deactivate orderBooking
+
+user->orderBooking:用户请求支付表单(payForm)
+orderBooking->orderPackage:获取子单的支付表单
+user->payCenter:用户支付
+payCenter-> orderPackage:通知支付成功
+activate orderPackage
+orderPackage->insurance:取消险投保
+insurance-->orderPackage:(异步)告知状态
+deactivate orderPackage
+
+user->orderCore:订单取消或者被拒绝
+orderCore->orderStore:更新订单状态
+orderStore-->orderPackage:告知订单取消(拒绝)
+orderPackage->insurance:取消险撤保
+insurance-->orderPackage:(异步)告知状态
+
+user -> orderPackage:取消险理赔
+orderPackage->orderStore:更新orderPackage状态
+orderPackage->notify:调用notify发邮件给保险公司
+@enduml

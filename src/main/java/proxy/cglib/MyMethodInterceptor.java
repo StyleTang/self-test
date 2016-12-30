@@ -1,7 +1,6 @@
 package proxy.cglib;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
-import proxy.common.ISubject;
 
 import java.lang.reflect.Method;
 
@@ -10,7 +9,7 @@ import java.lang.reflect.Method;
  */
 public class MyMethodInterceptor implements MethodInterceptor {
     private Object object;
-    MyMethodInterceptor(Object object){
+    public MyMethodInterceptor(Object object){
         this.object = object;
     }
 

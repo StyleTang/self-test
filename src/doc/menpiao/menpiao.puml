@@ -1,7 +1,8 @@
 @startuml
-orderPackage -> tickets: saveOrder
-orderPackage -> tickets: queryOrder
-orderPackage -> tickets: payOrder
-orderPackage -> tickets: queryOrder
-tickets-->orderPackage:notify tickets
+orderBooking -> orderPackage: saveOrder(同时记录支付信息tradeInfo)
+orderBooking -> orderPackage: payForm(组装tradeInfo里的信息)
+payCenter -> orderPackage :支付成功回调,更新支付成功状态,同时触发支付成功的插件动作
+orderPackage -> tickets:调用门票扣款出票,
+tickets->orderPackage:回调告知出票状态
+orderPackage->payCenter:如果出票失败,进行退款
 @enduml

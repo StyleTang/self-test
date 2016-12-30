@@ -1,0 +1,20 @@
+@startuml
+title 判断误判程度及扩容流程图
+(*)  --> "计算 临界值x=当前len*设定的百分比
+设置初始值 allCount=0"
+--> "获取一个没有被访问的filter" as fetchFilter
+If 已经遍历完所有的filter?  then
+--> [Yes] "比较allCount与临街值x的大小"
+  if 比较allCount>=临街值x? then
+  -->[Yes] "如果len可以继续扩容,那么len=len*2"
+-->(*)
+  else
+  -->[No] "维持现状"
+  Endif
+-->(*)
+else
+--> [No]"计算当前filter中为1的数量filerCount
+allCount+=filerCount"
+--> fetchFilter
+Endif
+@enduml

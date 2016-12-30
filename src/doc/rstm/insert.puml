@@ -1,0 +1,16 @@
+@startuml
+title 不同位串长度下插入流程图
+(*)--> "执行未执行的hash函数" as goHash
+If 已经遍历完所有的hash函数?  then
+--> [Yes] (*)
+else
+--> [No]获取当前误判情况下的位串长度len
+-->"
+根据当前位串长度len进行hash,求出index(使用哪个filter)
+"
+--> "根据当前位串长度进行hash,求出mask"
+--> "设置对应filter的mask位为1
+filter[index]|=(1<<<mask)"
+-->goHash
+Endif
+@enduml

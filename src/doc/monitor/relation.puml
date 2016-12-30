@@ -1,0 +1,18 @@
+@startuml
+hotel.tts.v2.submit : h_qta_orderbooking
+saveOrder:h_qta_orderbooking
+QProductRemote.queryOrderProduct:h_qta_openapi
+nprice.priceForQTAValidation.jsp:h_hprice
+ProductRemote.query:h_qta_openapi
+SHotelBlackWhiteListRemote.querySHotelRPBlackWhiteList:h_qta_product_price_provider
+OrderStoreReadService.queryByOrderNo:hotel_qta_order_store_provider
+MainOrderRemote.generateMainOrderData:qta_order_biz_p
+[*] -> hotel.tts.v2.submit
+hotel.tts.v2.submit --> saveOrder
+saveOrder -->QProductRemote.queryOrderProduct
+QProductRemote.queryOrderProduct --> nprice.priceForQTAValidation.jsp
+QProductRemote.queryOrderProduct-->ProductRemote.query
+ProductRemote.query-->SHotelBlackWhiteListRemote.querySHotelRPBlackWhiteList
+saveOrder -->MainOrderRemote.generateMainOrderData
+saveOrder -->OrderStoreReadService.queryByOrderNo
+@enduml

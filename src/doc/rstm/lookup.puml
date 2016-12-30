@@ -1,0 +1,20 @@
+@startuml
+title 判断是否冲突流程图(变长位串)
+(*)--> "执行未执行的hash函数" as goHash
+If 已经遍历完所有的hash函数?  then
+--> [Yes] "没有检测到冲突"
+--> (*)
+else
+--> [No]"根据当前误判情况求出的位串长度进行hash
+拿hash值和filter进行比对"
+if 存在冲突? then
+--> [Yes] "检测到冲突" as chongtu
+-->(*)
+else
+-->[No] "检测不同位长下的hash是否冲突"
+if 不同位长下相对应的位冲突? then
+-->[Yes] chongtu
+else
+-->[No] goHash
+Endif
+@enduml
