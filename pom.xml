@@ -97,6 +97,12 @@
         </dependency>
         <!--btrace-->
 
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.8.0.GA</version>
+        </dependency>
+
 
     </dependencies>
 

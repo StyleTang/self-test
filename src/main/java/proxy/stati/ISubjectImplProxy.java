@@ -10,7 +10,8 @@ import proxy.base.ISubject;
  * 继承接口的每一个方法都需要自己去进行代理
  */
 public class ISubjectImplProxy implements ISubject {
-    ISubject iSubjectInner;
+    //代理了这个类
+    private ISubject iSubjectInner;
 
     public ISubjectImplProxy(ISubject iSubject) {
         iSubjectInner = iSubject;
