@@ -1,0 +1,79 @@
+@startuml
+skinparam linetype ortho
+cloud NameServerCluster {
+  node NameServer1
+  node NameServer2
+  node NameServer3
+}
+
+
+cloud ProducerCluster    {
+package ProducerGroupA{
+   node ProducerAClient1
+    node ProducerAClient2
+
+ProducerAClient1-[bold,#aqua]->NameServerCluster
+ProducerAClient2-[bold,#aqua]->NameServerCluster
+}
+ package ProducerGroupX{
+    node ProducerGroupXClientX
+    }
+}
+cloud ConsumerCluster {
+package ConsumerGroupX{
+  node ConsumerGroupXClientX
+}
+
+package ConsumerGroupA{
+  node ConsumerGroupAClient1
+  node ConsumerGroupAClient2
+}
+
+
+}
+
+storage BrokerCluster {
+storage BrokerA{
+    storage BrokerMaster1{
+    storage Topic{
+            node TopicQueue0
+            node TopicQueue1
+            node TopicQueue2
+        }
+        storage TopicXXX{
+                node queue0
+                node queue1
+            }
+        ProducerAClient1 -[bold,#green]->TopicQueue0
+        ProducerAClient1 -[bold,#green]->TopicQueue1
+        ProducerAClient1 -[bold,#green]->TopicQueue2
+        ProducerAClient2 -[bold,#green]->TopicQueue0
+        ProducerAClient2 -[bold,#green]->TopicQueue1
+        ProducerAClient2 -[bold,#green]->TopicQueue2
+        TopicQueue0<-[bold,#blue]-ConsumerGroupAClient1
+        TopicQueue2<-[bold,#blue]-ConsumerGroupAClient2
+        TopicQueue1<-[bold,#blue]-ConsumerGroupAClient1
+        ConsumerGroupAClient2-[bold,#aqua]->NameServerCluster
+        ConsumerGroupAClient1-[bold,#aqua]->NameServerCluster
+    }
+    storage BrokerSlave1{
+        storage Topic(copy){
+            }
+            storage TopicXXX(copy){
+                }
+    }
+  }
+  storage BrokerB{
+    storage BrokerMaster2
+    storage BrokerSlave2
+}
+  BrokerMaster1-[bold,#ff00ff]->BrokerSlave1
+  BrokerMaster2-[bold,#ff00ff]->BrokerSlave2
+
+  BrokerMaster1-[bold,#aqua]->NameServerCluster
+  BrokerSlave1-[bold,#aqua]->NameServerCluster
+
+
+}
+
+@enduml
